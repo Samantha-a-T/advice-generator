@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="./images/favicon-32x32.png"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <title>Frontend Mentor | Advice generator app | Samantha Thibault</title>
+
+    <style>
+      .attribution {
+        font-size: 11px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.524);
+      }
+      .attribution a {
+        color: hsl(228, 45%, 44%);
+      }
+      body {
+        background-color: hsl(218, 23%, 16%);
+        padding: 200px 0;
+      }
+      .advice-container {
+        background-color: hsl(217, 19%, 24%);
+        max-width: 600px;
+        margin: 0 auto;
+        border-radius: 10px;
+        text-align: center;
+        padding: 10px 0 60px;
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+      }
+
+      .advice-img img {
+        background-color: hsl(150, 100%, 66%);
+        padding: 20px;
+        border-radius: 50px;
+      }
+
+      .advice-img img:hover {
+        box-shadow: 0 0 10px hsl(150, 100%, 66%), 0 0 20px hsl(150, 100%, 66%),
+          0 0 40px hsl(150, 100%, 66%);
+      }
+      .advice-id {
+        font-size: 15px;
+        color: white;
+        font-weight: 300;
+        margin: 40px 0 10px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-family: sans-serif;
+        color: hsl(150, 100%, 66%);
+      }
+      .advice-text {
+        font-size: 30px;
+        color: rgb(255, 255, 255, 0.8);
+        font-weight: 600;
+        padding: 0 50px 10px;
+      }
+
+      footer {
+        text-align: center;
+        margin: -35px 0 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="advice-container">
+      <h3 class="advice-id" id="advice-id"></h3>
+      <h1 class="advice-text" id="advice-text"></h1>
+      <img src="/images/pattern-divider-desktop.svg" alt="pattern divider" />
+    </div>
+    <footer>
+      <a href="/" class="advice-img">
+        <img src="/images/icon-dice.svg" alt="dice" />
+      </a>
+    </footer>
+    <div class="attribution">
+      Challenge by
+      <a href="https://www.frontendmentor.io?ref=challenge" target="_blank"
+        >Frontend Mentor</a
+      >. Coded by <a href="#">Samantha Thibault</a>.
+    </div>
+    <script>
+      function handleResponse(data) {
+        console.log(data);
+        let adviceId = document.querySelector("#advice-id");
+        let adviceText = document.querySelector("#advice-text");
+        adviceId.innerHTML = `Advice #${data.data.slip.id}`;
+        adviceText.innerHTML = `${data.data.slip.advice}`;
+      }
+
+      let apiUrl = "https://api.adviceslip.com/advice";
+      axios.get(apiUrl).then(handleResponse);
+    </script>
+  </body>
+</html>
